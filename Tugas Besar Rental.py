@@ -122,7 +122,6 @@ def proses_pengembalian():
 
     id_cari = ""
     for karakter in id_input:
-        kode = ord(karakter)
         if 97 <= kode <= 122:
             id_cari = id_cari + chr(kode - 32)
         else:
@@ -132,14 +131,14 @@ def proses_pengembalian():
 
     if idx_t == -1:
         print("  [!] ID Transaksi tidak ditemukan.")
-        tekan_enter()
+        print()
         return
 
     trx = transaksi[idx_t]
 
     if trx[8] == "Selesai":
         print("  [!] Transaksi ini sudah pernah dikembalikan.")
-        tekan_enter()
+        print()
         return
 
     print("  DETAIL TRANSAKSI")

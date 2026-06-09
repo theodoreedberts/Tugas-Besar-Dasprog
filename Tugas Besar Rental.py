@@ -48,7 +48,7 @@ def input_angka(prompt):
         if valid and nilai != "":
             return int(nilai)
         print("Input harus berupa angka!")
-
+    
 def cek_member():
     hasil_nama_member   = ""
     hasil_diskon_member = 0
@@ -66,8 +66,6 @@ def cek_member():
     print("Anda mendapat diskon",str(hasil_diskon_member),"%.")
     return hasil_diskon_member,hasil_nama_member
     
-
-
             
 # Justin
 def proses_peminjaman():
@@ -120,11 +118,19 @@ def proses_pengembalian():
     id_input = input("Masukkan ID Transaksi (contoh: TRX-001): ")
     id_input = hapus_spasi(id_input)
 
+    kecil = ["a","b","c","d","e","f","g","h","i","j","k","l","m",
+         "n","o","p","q","r","s","t","u","v","w","x","y","z"]
+    besar = ["A","B","C","D","E","F","G","H","I","J","K","L","M",
+         "N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
+
     id_cari = ""
     for karakter in id_input:
-        if 97 <= kode <= 122:
-            id_cari = id_cari + chr(kode - 32)
-        else:
+        sudah = False
+        for i in range(26):
+            if karakter == kecil[i] and sudah == False:
+                id_cari = id_cari + besar[i]
+                sudah = True
+        if sudah == False:
             id_cari = id_cari + karakter
 
     idx_t = cari_transaksi_by_id(id_cari)

@@ -107,6 +107,50 @@ def proses_peminjaman():
             print(f"{id_k} \t {nama} \t {jenis} \t Rp {tarif} \t {status}")
                 
     print("=========================================================================")
+
+#Theodore
+def proses_pengembalian():
+    print("PENGEMBALIAN KENDARAAN")
+    
+    if (jumlah_transsaksi == 0):
+        print("Belum ada transaksi yang tercatat")
+        print()
+        return
+    
+    id_input = input("Masukkan ID Transaksi (contoh: TRX-001): ")
+    id_input = hapus_spasi(id_input)
+
+    id_cari = ""
+    for karakter in id_input:
+        kode = ord(karakter)
+        if 97 <= kode <= 122:
+            id_cari = id_cari + chr(kode - 32)
+        else:
+            id_cari = id_cari + karakter
+
+    idx_t = cari_transaksi_by_id(id_cari)
+
+    if idx_t == -1:
+        print("  [!] ID Transaksi tidak ditemukan.")
+        tekan_enter()
+        return
+
+    trx = transaksi[idx_t]
+
+    if trx[8] == "Selesai":
+        print("  [!] Transaksi ini sudah pernah dikembalikan.")
+        tekan_enter()
+        return
+
+    print("  DETAIL TRANSAKSI")
+    print("  ID Transaksi  : " + trx[0])
+    print("  Nama Penyewa  : " + trx[1])
+    print("  Kendaraan     : [" + trx[2] + "] " + trx[3])
+    print("  Jenis         : " + trx[4])
+    print("  Lama Sewa     : " + str(trx[5]) + " hari")
+    print("  Total Bayar   : " + format_rupiah(trx[6]))
+    print("  Pengembalian tepat waktu (sistem sederhana, tanpa tanggal).")
+    
 #Theodore
 def menu_utama():
     while True:

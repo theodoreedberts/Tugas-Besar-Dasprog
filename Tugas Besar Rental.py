@@ -184,26 +184,15 @@ def bersihkan_layar():
     for i in range(5):
         print("")
 
-def cetak_garis(karakter, panjang):
-    # Kamus Lokal
-    # karakter : karakter yang akan dicetak sebagai garis
-    # panjang  : jumlah karakter yang akan dicetak
-    # baris    : string untuk menampung karakter garis
-    # i        : variabel iterasi
-    baris = ""
-    for i in range(panjang):
-        baris = baris + karakter
-    print(baris)
-
 def cetak_header(judul):
     # Kamus Lokal
     # judul : teks judul header yang akan dicetak
     bersihkan_layar()
-    cetak_garis("=", 57)
+    print("=" * 57)
     print("         SISTEM RENTAL KENDARAAN")
-    cetak_garis("=", 57)
+    print("=" * 57)
     print("  " + judul)
-    cetak_garis("-", 57)
+    print("-" * 57)
 
 def format_rupiah(nominal):
     # Kamus Lokal
@@ -292,8 +281,6 @@ def input_angka(prompt, min_val, max_val):
                     
     return hasil_angka
 
-def tekan_enter():
-    input("\n  Tekan Enter untuk kembali ke menu...")
 # Fungsi dari def ini membuang spasi kosong yang tidak sengaja terketik di awal atau di akhir input.
 def hapus_spasi(teks):
     # Kamus Lokal
@@ -432,7 +419,7 @@ def tampilkan_ketersediaan(filter_jenis):
     k3 = rata_kiri("Jenis", 6)
     k4 = rata_kanan("Harga/Hari", 12)
     print("  " + k1 + "  " + k2 + "  " + k3 + "  " + k4 + "  Status")
-    cetak_garis("-", 57)
+    print("-" * 57)
 
     total    = 0
     tersedia = 0
@@ -453,10 +440,10 @@ def tampilkan_ketersediaan(filter_jenis):
             c4 = rata_kanan(format_rupiah(baris[3]), 12)
             print("  " + c1 + "  " + c2 + "  " + c3 + "  " + c4 + "  " + status)
 
-    cetak_garis("-", 57)
+    print("=" * 57)
     print("  Total: " + str(total) + " unit  |  Tersedia: " + str(tersedia) +
           "  |  Disewa: " + str(total - tersedia))
-    cetak_garis("=", 57)
+    print("=" * 57)
 
 
 # ==============================================
@@ -555,7 +542,7 @@ def proses_peminjaman():
             ada_tersedia = True
     if not ada_tersedia:
         print("  [!] Tidak ada " + jenis + " yang tersedia saat ini.")
-        tekan_enter()
+        input("\n  Tekan Enter untuk kembali ke menu...")
         return
 
     print("\n  Masukkan ID kendaraan (contoh: M001 / T001):")
@@ -567,17 +554,17 @@ def proses_peminjaman():
     # jika salah input pada ID Kendaraan
     if idx_k == -1:
         print(" [!] ID kendaraan tidak ditemukan.")
-        tekan_enter()
+        input("\n  Tekan Enter untuk kembali ke menu...")
         return
 
     if kendaraan[idx_k][4] == "Tidak":
         print(" [!] Kendaraan sedang tidak tersedia.")
-        tekan_enter()
+        input("\n  Tekan Enter untuk kembali ke menu...")
         return
 
     if kendaraan[idx_k][2] != jenis:
         print("  [!] Kendaraan " + kid + " bukan jenis " + jenis + ".")
-        tekan_enter()
+        input("\n  Tekan Enter untuk kembali ke menu...")
         return
     # input berapa hari untuk disewa
     jumlah_hari = input_angka("  Jumlah hari sewa (1-30): ", 1, 30)
@@ -595,21 +582,21 @@ def proses_peminjaman():
     id_trx = buat_id_transaksi()
     
     # kenneth
-    cetak_garis("-", 57)
+    print("=" * 57)
     print("  RINGKASAN BOOKING")
-    cetak_garis("-", 57)
+    print("=" * 57)
     print("  ID Transaksi  : " + id_trx)
     print("  Nama Penyewa  : " + nama_penyewa)
     print("  Kendaraan     : [" + kid + "] " + kendaraan[idx_k][1])
     print("  Jenis         : " + kendaraan[idx_k][2])
     print("  Harga/Hari    : " + format_rupiah(kendaraan[idx_k][3]))
     print("  Lama Sewa     : " + str(jumlah_hari) + " hari")
-    cetak_garis("-", 57)
+    print("=" * 57)
     print("  Subtotal      : " + format_rupiah(hasil_subtotal))
     if diskon > 0:
         print("  Diskon (" + str(diskon) + "%)    : -" + format_rupiah(hasil_potongan))
     print("  TOTAL BAYAR   : " + format_rupiah(hasil_total))
-    cetak_garis("=", 57)
+    print("=" * 57)
 
     print("  Konfirmasi peminjaman?")
     print("  [1] Ya, Konfirmasi")
@@ -618,7 +605,7 @@ def proses_peminjaman():
 
     if konfirm == 2:
         print("\n  Peminjaman dibatalkan.")
-        tekan_enter()
+        input("\n  Tekan Enter untuk kembali ke menu...")
         return
 
     transaksi[jumlah_transaksi] = [
@@ -637,7 +624,7 @@ def proses_peminjaman():
 
     print("\n  Booking berhasil!")
     print("  Simpan ID Transaksi Anda: " + id_trx)
-    tekan_enter()
+    input("\n  Tekan Enter untuk kembali ke menu...")
 
 
 # ==============================================
@@ -656,7 +643,7 @@ def proses_pengembalian():
 
     if jumlah_transaksi == 0:
         print("  Belum ada transaksi yang tercatat.")
-        tekan_enter()
+        input("\n  Tekan Enter untuk kembali ke menu...")
         return
 
     id_input = input("  Masukkan ID Transaksi (contoh: TRX-001): ")
@@ -667,28 +654,28 @@ def proses_pengembalian():
 
     if idx_t == -1:
         print("  [!] ID Transaksi tidak ditemukan.")
-        tekan_enter()
+        input("\n  Tekan Enter untuk kembali ke menu...")
         return
 
     trx = transaksi[idx_t]
 
     if trx[8] == "Selesai":
         print("  [!] Transaksi ini sudah pernah dikembalikan.")
-        tekan_enter()
+        input("\n  Tekan Enter untuk kembali ke menu...")
         return
 
-    cetak_garis("-", 57)
+    print("=" * 57)
     print("  DETAIL TRANSAKSI")
-    cetak_garis("-", 57)
+    print("=" * 57)
     print("  ID Transaksi  : " + trx[0])
     print("  Nama Penyewa  : " + trx[1])
     print("  Kendaraan     : [" + trx[2] + "] " + trx[3])
     print("  Jenis         : " + trx[4])
     print("  Lama Sewa     : " + str(trx[5]) + " hari")
     print("  Total Bayar   : " + format_rupiah(trx[6]))
-    cetak_garis("-", 57)
+    print("=" * 57)
     print("  Pengembalian tepat waktu (sistem sederhana).")
-    cetak_garis("=", 57)
+    print("=" * 57)
 
     print("  Konfirmasi pengembalian?")
     print("  [1] Ya, Kembalikan")
@@ -697,7 +684,7 @@ def proses_pengembalian():
 
     if konfirm == 2:
         print("\n  Pengembalian dibatalkan.")
-        tekan_enter()
+        input("\n  Tekan Enter untuk kembali ke menu...")
         return
 
     transaksi[idx_t][8] = "Selesai"
@@ -708,7 +695,7 @@ def proses_pengembalian():
 
     print("\n  Kendaraan [" + trx[2] + "] " + trx[3] + " berhasil dikembalikan.")
     print("  Status kendaraan kini: Tersedia")
-    tekan_enter()
+    input("\n  Tekan Enter untuk kembali ke menu...")
 
 
 # ==============================================
@@ -730,7 +717,7 @@ def tampilkan_riwayat():
 
     if jumlah_transaksi == 0:
         print("  Belum ada transaksi yang tercatat.")
-        tekan_enter()
+        input("\n  Tekan Enter untuk kembali ke menu...")
         return
 
     data_sorted, jml = bubble_sort_transaksi_by_total()
@@ -740,7 +727,7 @@ def tampilkan_riwayat():
     k3 = rata_kiri("Kendaraan", 18)
     k4 = rata_kanan("Total Bayar", 12)
     print("  " + k1 + "  " + k2 + "  " + k3 + "  " + k4 + "  Status")
-    cetak_garis("-", 57)
+    print("=" * 57)
 
     for i in range(jml):
         t = data_sorted[i]
@@ -755,7 +742,7 @@ def tampilkan_riwayat():
         
         print("  " + c1 + "  " + c2 + "  " + c3 + "  " + c4 + "  " + t[8])
 
-    cetak_garis("-", 57)
+    print("=" * 57)
     total_aktif   = 0
     total_selesai = 0
     for i in range(jumlah_transaksi):
@@ -766,8 +753,8 @@ def tampilkan_riwayat():
     print("  Total: " + str(jumlah_transaksi) +
           "  |  Aktif: " + str(total_aktif) +
           "  |  Selesai: " + str(total_selesai))
-    cetak_garis("=", 57)
-    tekan_enter()
+    print("=" * 57)
+    input("\n  Tekan Enter untuk kembali ke menu...")
 
 
 # ==============================================
@@ -791,7 +778,7 @@ def tampilkan_kendaraan_terurut():
     k3 = rata_kiri("Jenis", 6)
     k4 = rata_kanan("Harga/Hari", 12)
     print("  " + k1 + "  " + k2 + "  " + k3 + "  " + k4 + "  Status")
-    cetak_garis("-", 57)
+    print("=" * 57)
 
     for i in range(MAX_KENDARAAN):
         baris  = data_sorted[i]
@@ -807,8 +794,8 @@ def tampilkan_kendaraan_terurut():
             
         print("  " + c1 + "  " + c2 + "  " + c3 + "  " + c4 + "  " + status)
 
-    cetak_garis("=", 57)
-    tekan_enter()
+    print("=" * 57)
+    input("\n  Tekan Enter untuk kembali ke menu...")
 
 
 # ==============================================
@@ -833,9 +820,9 @@ def fitur_cari_kendaraan():
     kata = hapus_spasi(kata)
     kata_lower = samakan_huruf(kata)
 
-    cetak_garis("-", 57)
+    print("=" * 57)
     print("  Hasil pencarian untuk: \"" + kata + "\"")
-    cetak_garis("-", 57)
+    print("=" * 57)
 
     ditemukan = False
     for i in range(MAX_KENDARAAN):
@@ -868,9 +855,8 @@ def fitur_cari_kendaraan():
     if not ditemukan:
         print("  Tidak ditemukan kendaraan dengan kata kunci tersebut.")
 
-    cetak_garis("=", 57)
-    tekan_enter()
-
+    print("=" * 57)
+    input("\n  Tekan Enter untuk kembali ke menu...")
 
 # ==============================================
 #  MENU UTAMA
@@ -891,10 +877,8 @@ def menu_utama():
         print("  [5]  Daftar Kendaraan (Urut Harga)")
         print("  [6]  Cari Kendaraan")
         print("  [0]  Keluar")
-        cetak_garis("-", 57)
-
+        print("=" * 57)
         pilihan = input("  Pilih menu: ")
-
         if pilihan == "1":
             proses_peminjaman()
         elif pilihan == "2":
@@ -912,7 +896,7 @@ def menu_utama():
                 tampilkan_ketersediaan("Mobil")
             else:
                 tampilkan_ketersediaan("Motor")
-            tekan_enter()
+            input("\n  Tekan Enter untuk kembali ke menu...")
         elif pilihan == "4":
             tampilkan_riwayat()
         elif pilihan == "5":
@@ -926,16 +910,8 @@ def menu_utama():
             program_jalan = False
         else:
             print("  [!] Pilihan tidak valid.")
-            tekan_enter()
-
-
-# ==============================================
-#  ENTRY POINT
-# ==============================================
-
+            input("\n  Tekan Enter untuk kembali ke menu...")
 def main():
     menu_utama()
-
-
 if __name__ == "__main__":
     main()

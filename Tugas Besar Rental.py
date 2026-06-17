@@ -39,13 +39,13 @@ kendaraan = [
 # ─────────────────────────────────────────────
 
 member = [
-    ["budi",      "Budi Santoso",              15],
-    ["siti",      "Siti Rahayu",               10],
-    ["andi",      "Andi Wijaya",               20],
-    ["rossevine", "Rossevine Artha",           45],
-    ["kenneth",   "Kenneth Ansell Hansjaya",   20],
-    ["justin",    "Justin Gabriel Kristianto", 30],
-    ["theo",      "Theodore Edbert Suryo",     25]
+    ["budi",      "Budi Santoso",               15],
+    ["siti",      "Siti Rahayu",                10],
+    ["andi",      "Andi Wijaya",                20],
+    ["rossevine", "Rossevine Artha Nathasya",   45],
+    ["kenneth",   "Kenneth Ansell Hansjaya",    20],
+    ["justin",    "Justin Gabriel Kristianto",  30],
+    ["theo",      "Theodore Edbert Suryo",      25]
 ]
 
 # ─────────────────────────────────────────────
@@ -57,14 +57,26 @@ jumlah_transaksi = 0
 id_counter       = 1   
 
 def panjang_teks(teks):
-    # Pengganti len()
+    # Kamus Lokal
+    # teks     : string/teks yang akan dihitung panjangnya
+    # hitung   : variabel untuk menyimpan jumlah karakter
+    # karakter : variabel iterasi untuk setiap karakter dalam teks
+    
+    # def ini untuk menggantikan len()
     hitung = 0
     for karakter in str(teks):
         hitung = hitung + 1
     return hitung
 
+#Kedua def ini untuk memformat output tabel agar kolom-kolom terlihat rapi dan menjaga lebar tampilan tetap konsisten ketika mencetak daftar kendaraan, member, atau transaksi.
 def rata_kiri(teks, panjang):
-    # Pengganti {:<} pada format()
+    # Kamus Lokal
+    # teks    : teks yang akan diformat
+    # panjang : panjang karakter total yang diinginkan
+    # t       : salinan teks dalam bentuk string
+    # p       : panjang string t
+    # sisa    : jumlah spasi yang perlu ditambahkan
+    # i       : variabel iterasi
     t = str(teks)
     p = panjang_teks(t)
     sisa = panjang - p
@@ -74,7 +86,14 @@ def rata_kiri(teks, panjang):
     return t
 
 def rata_kanan(teks, panjang):
-    # Pengganti {:>} pada format()
+    # Kamus Lokal
+    # teks    : teks yang akan diformat
+    # panjang : panjang karakter total yang diinginkan
+    # t       : salinan teks dalam bentuk string
+    # p       : panjang string t
+    # sisa    : jumlah spasi yang perlu ditambahkan di awal
+    # spasi   : string yang menampung spasi tambahan
+    # i       : variabel iterasi
     t = str(teks)
     p = panjang_teks(t)
     sisa = panjang - p
@@ -85,6 +104,14 @@ def rata_kanan(teks, panjang):
     return spasi + t
 
 def potong_teks(teks, batas):
+    # Kamus Lokal
+    # teks  : teks yang akan dipotong
+    # batas : batas jumlah karakter maksimal
+    # t     : salinan teks dalam bentuk string
+    # p     : panjang string t
+    # hasil : string yang menampung teks hasil potongan
+    # i     : variabel iterasi
+    
     # Pengganti slicing string teks[:batas]
     t = str(teks)
     p = panjang_teks(t)
@@ -95,12 +122,19 @@ def potong_teks(teks, batas):
         hasil = hasil + t[i]
     return hasil
 
-# ══════════════════════════════════════════════
-#  FUNGSI MAPPING KARAKTER (TANPA ORD & CHR)
-# ══════════════════════════════════════════════
-
+# ==============================================
+#  FUNGSI MAPPING KARAKTER 
+# ==============================================
+# Mengubah huruf besar ke kecil. jika input dimasukkan huruf kecil bisa juga masuk ke dalam inputnya meskipun di perintah kodingannya huruf besar.
 def samakan_huruf(teks):
-    # Mengubah huruf besar ke kecil (Pengganti .lower() tanpa ord/chr)
+    # Kamus Lokal
+    # teks      : teks yang akan diubah menjadi huruf kecil
+    # h_besar   : string berisi daftar huruf besar
+    # h_kecil   : string berisi daftar huruf kecil
+    # hasil     : string yang menampung hasil teks huruf kecil
+    # karakter  : variabel iterasi untuk setiap karakter pada teks
+    # ditemukan : boolean untuk menandai apakah karakter adalah huruf besar
+    # i         : variabel iterasi indeks
     h_besar = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     h_kecil = "abcdefghijklmnopqrstuvwxyz"
     hasil = ""
@@ -117,6 +151,14 @@ def samakan_huruf(teks):
     return hasil
 
 def ubah_huruf_besar(teks):
+    # Kamus Lokal
+    # teks      : teks yang akan diubah menjadi huruf besar
+    # h_besar   : string berisi daftar huruf besar
+    # h_kecil   : string berisi daftar huruf kecil
+    # hasil     : string yang menampung hasil teks huruf besar
+    # karakter  : variabel iterasi untuk setiap karakter pada teks
+    # ditemukan : boolean untuk menandai apakah karakter adalah huruf kecil
+    # i         : variabel iterasi indeks
     h_besar = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     h_kecil = "abcdefghijklmnopqrstuvwxyz"
     hasil = ""
@@ -132,21 +174,30 @@ def ubah_huruf_besar(teks):
             
     return hasil
 
-# ══════════════════════════════════════════════
+# ==============================================
 #  FUNGSI UTILITAS
-# ══════════════════════════════════════════════
+# ==============================================
 
 def bersihkan_layar():
-    for i in range(10):
+    # Kamus Lokal
+    # i : variabel iterasi
+    for i in range(5):
         print("")
 
 def cetak_garis(karakter, panjang):
+    # Kamus Lokal
+    # karakter : karakter yang akan dicetak sebagai garis
+    # panjang  : jumlah karakter yang akan dicetak
+    # baris    : string untuk menampung karakter garis
+    # i        : variabel iterasi
     baris = ""
     for i in range(panjang):
         baris = baris + karakter
     print(baris)
 
 def cetak_header(judul):
+    # Kamus Lokal
+    # judul : teks judul header yang akan dicetak
     bersihkan_layar()
     cetak_garis("=", 57)
     print("         SISTEM RENTAL KENDARAAN")
@@ -155,6 +206,13 @@ def cetak_header(judul):
     cetak_garis("-", 57)
 
 def format_rupiah(nominal):
+    # Kamus Lokal
+    # nominal : nilai angka/nominal yang akan diformat ke rupiah
+    # angka   : string dari nilai nominal
+    # hasil   : string hasil format
+    # hitung  : variabel untuk menghitung jumlah digit yang sudah diproses
+    # p_angka : panjang dari string angka
+    # i       : variabel iterasi untuk membaca angka dari belakang
     angka = str(nominal)
     hasil = ""
     hitung = 0
@@ -168,6 +226,8 @@ def format_rupiah(nominal):
     return "Rp " + hasil
 
 def buat_id_transaksi():
+    # Kamus Lokal
+    # kode : string yang menampung ID transaksi yang baru dibuat
     global id_counter
     if id_counter < 10:
         kode = "TRX-00" + str(id_counter)
@@ -179,6 +239,20 @@ def buat_id_transaksi():
     return kode
 # justin
 def input_angka(prompt, min_val, max_val):
+    # Kamus Lokal
+    # prompt        : teks pertanyaan/petunjuk untuk input
+    # min_val       : nilai minimal yang diperbolehkan
+    # max_val       : nilai maksimal yang diperbolehkan
+    # angka_valid   : string berisi karakter angka yang valid
+    # input_selesai : boolean status perulangan input
+    # hasil_angka   : variabel penampung nilai angka akhir
+    # input_teks    : teks yang diinputkan pengguna
+    # p             : panjang teks input
+    # semua_angka   : boolean untuk cek apakah input berisi angka semua
+    # char_dikenal  : boolean untuk cek validitas satu karakter
+    # nilai_akhir   : angka hasil konversi dari string
+    # i, j          : variabel iterasi
+    
     angka_valid = "0123456789"
     input_selesai = False
     hasil_angka = 0
@@ -220,40 +294,51 @@ def input_angka(prompt, min_val, max_val):
 
 def tekan_enter():
     input("\n  Tekan Enter untuk kembali ke menu...")
-
+# Fungsi dari def ini membuang spasi kosong yang tidak sengaja terketik di awal atau di akhir input.
 def hapus_spasi(teks):
+    # Kamus Lokal
+    # teks  : teks yang akan dihapus spasi di awal dan akhirnya
+    # p     : panjang teks
+    # i     : indeks awal teks yang bukan spasi
+    # j     : indeks akhir teks yang bukan spasi
+    # hasil : string teks hasil tanpa spasi berlebih
+    # k     : variabel iterasi
     p = panjang_teks(teks)
     if p == 0:
         return ""
-        
     i = 0
     while i < p and teks[i] == " ":
         i = i + 1
-        
     j = p - 1
     while j >= 0 and teks[j] == " ":
         j = j - 1
-        
     if i > j:
         return ""
-        
     hasil = ""
     for k in range(i, j + 1):
         hasil = hasil + teks[k]
     return hasil
 
 
-# ══════════════════════════════════════════════
+# ==============================================
 #  SEARCHING & SORTING
-# ══════════════════════════════════════════════
+# ==============================================
 
+# Ketiga fungsi ini memakai Sequential Search
 def cari_kendaraan_by_id(id_cari):
+    # Kamus Lokal
+    # id_cari : ID kendaraan yang dicari
+    # i       : variabel iterasi
     for i in range(MAX_KENDARAAN):
         if kendaraan[i][0] == id_cari:
             return i
     return -1
 
 def cari_member_by_nama(nama_cari):
+    # Kamus Lokal
+    # nama_cari  : nama member yang dicari
+    # nama_lower : nama pencarian yang sudah disamakan menjadi huruf kecil
+    # i          : variabel iterasi
     nama_lower = samakan_huruf(nama_cari)
     for i in range(MAX_MEMBER):
         if member[i][0] == nama_lower:
@@ -261,6 +346,9 @@ def cari_member_by_nama(nama_cari):
     return -1
 
 def cari_transaksi_by_id(id_cari):
+    # Kamus Lokal
+    # id_cari : ID transaksi yang dicari
+    # i       : variabel iterasi
     for i in range(jumlah_transaksi):
         if transaksi[i] is not None:
             if transaksi[i][0] == id_cari:
@@ -269,10 +357,19 @@ def cari_transaksi_by_id(id_cari):
 
 # Theodore
 def bubble_sort_kendaraan_by_harga():
+    # Kamus Lokal
+    # salinan    : list baru yang berisi copy dari data kendaraan
+    # i, j, x    : variabel iterasi
+    # temp       : variabel sementara untuk menukar elemen (swap)
+    # baris_copy : list untuk menampung salinan satu baris kendaraan
+    # baris_asli : data baris asli dari array kendaraan
     salinan = []
     for i in range(MAX_KENDARAAN):
-        salinan = salinan + [kendaraan[i][:]]
-
+        baris_copy = []
+        baris_asli = kendaraan[i]
+        for x in range(5): 
+            baris_copy = baris_copy + [baris_asli[x]]
+        salinan = salinan + [baris_copy]
     for i in range(MAX_KENDARAAN - 1):
         for j in range(MAX_KENDARAAN - 1 - i):
             if salinan[j][3] > salinan[j + 1][3]:
@@ -280,37 +377,56 @@ def bubble_sort_kendaraan_by_harga():
                 salinan[j]     = salinan[j + 1]
                 salinan[j + 1] = temp
     return salinan
-
+# kenneth
 def bubble_sort_transaksi_by_total():
+    # Kamus Lokal
+    # temp_trx   : list baru berisi copy dari data transaksi yang aktif (tidak None)
+    # jumlah     : jumlah transaksi riil
+    # p, k, x    : variabel iterasi
+    # _          : iterasi tak terpakai
+    # tem        : variabel sementara untuk menukar elemen (swap)
+    # baris_copy : list untuk menampung salinan satu baris transaksi
+    # baris_asli : data baris asli dari array transaksi
     temp_trx = []
     for i in range(jumlah_transaksi):
         if transaksi[i] is not None:
-            temp_trx = temp_trx + [transaksi[i][:]]
-
+            baris_copy = []
+            baris_asli = transaksi[i]
+            for x in range(9): 
+                baris_copy = baris_copy + [baris_asli[x]]
+            temp_trx = temp_trx + [baris_copy]
     jumlah = 0
     for _ in temp_trx:
         jumlah = jumlah + 1
-
-    for i in range(jumlah - 1):
-        for j in range(jumlah - 1 - i):
-            if temp_trx[j][6] < temp_trx[j + 1][6]:
-                temp           = temp_trx[j]
-                temp_trx[j]     = temp_trx[j + 1]
-                temp_trx[j + 1] = temp
+    for p in range(0, jumlah - 1, 1):
+        for k in range(jumlah - 1, p, -1):
+            # descending
+            if temp_trx[k][6] > temp_trx[k - 1][6]:
+                tem             = temp_trx[k]
+                temp_trx[k]     = temp_trx[k - 1]
+                temp_trx[k - 1] = tem
 
     return temp_trx, jumlah
 
 
-# ══════════════════════════════════════════════
+# ==============================================
 #  TAMPILKAN KETERSEDIAAN KENDARAAN
-# ══════════════════════════════════════════════
+# ==============================================
 
 def tampilkan_ketersediaan(filter_jenis):
+    # Kamus Lokal
+    # filter_jenis : string untuk filter jenis kendaraan ("Mobil", "Motor", atau "")
+    # k1, k2, k3, k4 : string penampung teks header kolom yang diformat
+    # total        : jumlah total kendaraan sesuai filter
+    # tersedia     : jumlah kendaraan yang tersedia
+    # i            : variabel iterasi
+    # baris        : variabel penampung data kendaraan per baris
+    # status       : string status kendaraan ("Tersedia" atau "Disewa")
+    # c1, c2, c3, c4 : string penampung teks data kolom yang diformat
     if filter_jenis == "":
         cetak_header("KETERSEDIAAN SEMUA KENDARAAN")
     else:
         cetak_header("KETERSEDIAAN KENDARAAN - " + filter_jenis)
-
     k1 = rata_kiri("ID", 6)
     k2 = rata_kiri("Nama Kendaraan", 23)
     k3 = rata_kiri("Jenis", 6)
@@ -343,9 +459,9 @@ def tampilkan_ketersediaan(filter_jenis):
     cetak_garis("=", 57)
 
 
-# ══════════════════════════════════════════════
+# ==============================================
 #  CEK MEMBER & HITUNG BIAYA
-# ══════════════════════════════════════════════
+# ==============================================
 
 hasil_nama_member   = ""
 hasil_diskon_member = 0
@@ -354,6 +470,12 @@ hasil_potongan = 0
 hasil_total    = 0
 
 def cek_member():
+    # Kamus Lokal
+    # pilihan      : pilihan menu member (1=Ya, 2=Tidak)
+    # selesai      : status loop verifikasi member
+    # nama_input   : nama member yang dimasukkan pengguna
+    # idx          : indeks member dalam daftar member, -1 jika tidak ditemukan
+    # pilih_ulang  : pilihan ulang jika data member tidak ditemukan (0/1)
     global hasil_nama_member, hasil_diskon_member
     hasil_nama_member   = ""
     hasil_diskon_member = 0
@@ -384,17 +506,33 @@ def cek_member():
                 selesai = True 
 
 def hitung_biaya(harga_per_hari, jumlah_hari, diskon_persen):
+    #Kamus Lokal
+    # hasil_subtotal    : rumus untuk menghitung tarif per hari berapa
+    # hasil_potongan    : rumus diskon
+    # hasil_total       : rumus total dari subtotal dikurangi diskon
     global hasil_subtotal, hasil_potongan, hasil_total
     hasil_subtotal = harga_per_hari * jumlah_hari
     hasil_potongan = (hasil_subtotal * diskon_persen) // 100
     hasil_total    = hasil_subtotal - hasil_potongan
 
 
-# ══════════════════════════════════════════════
+# ==============================================
 #  PROSES PEMINJAMAN
-# ══════════════════════════════════════════════
+# ==============================================
 # justin 
 def proses_peminjaman():
+    # Kamus Lokal
+    # pilihan_jenis  : pilihan jenis kendaraan yang diambil pengguna (1=Mobil, 2=Motor)
+    # jenis          : jenis kendaraan yang dipilih sebagai string
+    # ada_tersedia   : flag apakah ada kendaraan tersedia berdasarkan jenis
+    # kid_input      : input ID kendaraan mentah dari pengguna
+    # kid            : ID kendaraan dalam huruf besar
+    # idx_k          : indeks kendaraan dalam daftar kendaraan
+    # jumlah_hari    : lama sewa dalam hari
+    # nama_penyewa   : nama penyewa, default "Umum" jika tidak diisi
+    # diskon         : diskon member dalam persen
+    # id_trx         : ID transaksi yang dibuat
+    # konfirm        : pilihan konfirmasi transaksi (1=Ya, 2=Batal)
     global jumlah_transaksi
 
     cetak_header("PEMINJAMAN KENDARAAN")
@@ -426,7 +564,7 @@ def proses_peminjaman():
 
     kid = ubah_huruf_besar(kid_input)
     idx_k = cari_kendaraan_by_id(kid)
-
+    # jika salah input pada ID Kendaraan
     if idx_k == -1:
         print(" [!] ID kendaraan tidak ditemukan.")
         tekan_enter()
@@ -441,9 +579,9 @@ def proses_peminjaman():
         print("  [!] Kendaraan " + kid + " bukan jenis " + jenis + ".")
         tekan_enter()
         return
-
+    # input berapa hari untuk disewa
     jumlah_hari = input_angka("  Jumlah hari sewa (1-30): ", 1, 30)
-
+    # setelah diinput def cek_member akan mengecek datanya
     cek_member()
     nama_penyewa = hasil_nama_member
     diskon       = hasil_diskon_member
@@ -502,11 +640,18 @@ def proses_peminjaman():
     tekan_enter()
 
 
-# ══════════════════════════════════════════════
+# ==============================================
 #  PROSES PENGEMBALIAN
-# ══════════════════════════════════════════════
+# ==============================================
 # Theodore
 def proses_pengembalian():
+    # Kamus Lokal
+    # id_input    : input ID transaksi dari pengguna
+    # id_cari     : ID transaksi yang sudah disamakan huruf besarnya
+    # idx_t       : indeks transaksi dalam array transaksi, -1 jika tidak ditemukan
+    # trx         : data transaksi yang ditemukan
+    # konfirm     : pilihan konfirmasi pengembalian (1=Ya, 2=Batal)
+    # idx_k       : indeks kendaraan terkait dalam array kendaraan
     cetak_header("PENGEMBALIAN KENDARAAN")
 
     if jumlah_transaksi == 0:
@@ -566,11 +711,21 @@ def proses_pengembalian():
     tekan_enter()
 
 
-# ══════════════════════════════════════════════
+# ==============================================
 #  RIWAYAT TRANSAKSI 
-# ══════════════════════════════════════════════
-
+# ==============================================
+# kenneth
 def tampilkan_riwayat():
+    # Kamus Lokal
+    # data_sorted : salinan daftar transaksi yang sudah diurutkan berdasarkan total bayar
+    # jml         : jumlah transaksi yang valid dalam daftar transaksi yang disortir
+    # t           : baris data transaksi saat dicetak
+    # nama_cetak  : nama penyewa yang sudah dipotong agar sesuai lebar kolom
+    # kend_awal   : teks kendaraan gabungan ID dan nama kendaraan
+    # kend_cetak  : teks kendaraan yang sudah dipotong agar sesuai lebar kolom
+    # k1,k2,k3,k4 : teks kolom yang sudah diformat rata kiri/kanan
+    # total_aktif : jumlah transaksi status Aktif
+    # total_selesai : jumlah transaksi status Selesai
     cetak_header("RIWAYAT TRANSAKSI")
 
     if jumlah_transaksi == 0:
@@ -615,11 +770,18 @@ def tampilkan_riwayat():
     tekan_enter()
 
 
-# ══════════════════════════════════════════════
+# ==============================================
 #  DAFTAR KENDARAAN TERURUT 
-# ══════════════════════════════════════════════
+# ==============================================
 
 def tampilkan_kendaraan_terurut():
+    # Kamus Lokal
+    # data_sorted    : data kendaraan yang telah diurutkan berdasarkan harga
+    # k1, k2, k3, k4 : string penampung teks header kolom yang diformat
+    # i              : variabel iterasi
+    # baris          : variabel penampung data kendaraan per baris
+    # status         : string status kendaraan
+    # c1, c2, c3, c4 : string penampung teks data kolom yang diformat
     cetak_header("DAFTAR KENDARAAN (Urut Harga Termurah)")
 
     data_sorted = bubble_sort_kendaraan_by_harga()
@@ -649,11 +811,22 @@ def tampilkan_kendaraan_terurut():
     tekan_enter()
 
 
-# ══════════════════════════════════════════════
+# ==============================================
 #  CARI KENDARAAN 
-# ══════════════════════════════════════════════
+# ==============================================
 
 def fitur_cari_kendaraan():
+    # Kamus Lokal
+    # kata         : kata kunci input pencarian
+    # kata_lower   : kata kunci yang diubah menjadi huruf kecil
+    # ditemukan    : boolean status apakah kendaraan ditemukan
+    # i, j, k      : variabel iterasi
+    # nama_lower   : nama kendaraan yang diubah menjadi huruf kecil
+    # found_in     : boolean kecocokan kata pada string nama
+    # panjang_nama : panjang string nama kendaraan
+    # panjang_kata : panjang string kata kunci
+    # cocok        : boolean kecocokan per karakter
+    # status       : string status ketersediaan kendaraan
     cetak_header("CARI KENDARAAN")
 
     kata = input("  Masukkan kata kunci nama kendaraan: ")
@@ -699,11 +872,15 @@ def fitur_cari_kendaraan():
     tekan_enter()
 
 
-# ══════════════════════════════════════════════
+# ==============================================
 #  MENU UTAMA
-# ══════════════════════════════════════════════
+# ==============================================
 # Theodore
 def menu_utama():
+    # Kamus Lokal
+    # program_jalan : boolean untuk menjaga loop menu tetap berjalan
+    # pilihan       : input pilihan menu dari user
+    # sub           : input pilihan submenu
     program_jalan = True
     while program_jalan:
         cetak_header("MENU UTAMA")
@@ -752,9 +929,9 @@ def menu_utama():
             tekan_enter()
 
 
-# ══════════════════════════════════════════════
+# ==============================================
 #  ENTRY POINT
-# ══════════════════════════════════════════════
+# ==============================================
 
 def main():
     menu_utama()

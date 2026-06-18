@@ -635,8 +635,6 @@ def proses_pengembalian():
     print("  Lama Sewa     : " + str(trx[5]) + " hari")
     print("  Total Bayar   : " + format_rupiah(trx[6]))
     print("=" * 57)
-    print("  Pengembalian tepat waktu (sistem sederhana).")
-    print("=" * 57)
 
     print("  Konfirmasi pengembalian?")
     print("  [1] Ya, Kembalikan")

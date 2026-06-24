@@ -1,66 +1,55 @@
-data_kendaraan = [
-    ["Yamaha NMAX", 100000, "Tersedia"],
-    ["Honda Beat", 50000, "Tersedia"],
-    ["Toyota Avanza", 350000, "Disewa"],
-    ["Honda Brio", 300000, "Tersedia"]
+# Fitur:
+#   1. Peminjaman & pengembalian kendaraan
+#   2. Daftar jenis kendaraan (Mobil, Motor)
+#   3. Laporan ketersediaan kendaraan real-time
+#   4. Simulasi booking & perhitungan biaya + diskon member
+#   5. Sistem pengembalian via ID transaksi
+kendaraan = [
+    [1, "Totoya Calya", "Mobil", 120000, 0],
+    [2, "Hondoz XMAX 250", "Motor", 250000, 0],
+    [3, "Hondoz PCX 150", "Motor", 85000, 0],
+    [4, "Totoya 2020", "Mobil", 250000, 0],
+    [5, "Rolls Royce Spectre Series", "Mobil", 22135000, 0],
+    [6, "Innova Reborn", "Mobil", 450000, 0],
+    [7, "Ferrari SF90","Mobil",4895000,0],
+    [8, "Pagani Huayra", 4000000,0],
+    [9, "Harley Davidson FAT BOY","Motor",3024244]
 ]
-def insertionsort(N):
-    global data_kendaraan
-    for x in range(1, N):
-        tem = data_kendaraan[x]
-        i = x - 1
-        while i >= 0 and tem[0] < data_kendaraan[i][0]:
-            data_kendaraan[i+1] = data_kendaraan[i]
-            i -= 1
-        data_kendaraan[i+1] = tem
-    return 
-def lihat_kendaraan():
-    print("--- DAFTAR KENDARAAN ---")
-    N = 0
-    for data in data_kendaraan:
-        N = N + 1
-    insertionsort(N)
-    for i in range(N):
-        nomor = i + 1
-        nama = data_kendaraan[i][0]
-        harga = data_kendaraan[i][1]
-        status = data_kendaraan[i][2]
-        
-        print(nomor, ".", nama, "- Rp", harga, "-", status)
-        
-    print("------------------------")
-    print()
-# def peminjaman_kendaraan():
-def penambahan_kendaraan():
-    global data_kendaraan
-    print("--- Menambahkan Kendaraan ---")
-    nama_kendaraan = input("Masukkan Nama Kendaraan: ")
-    harga = int(input("Masukkan Harga Sewa: "))
-    status = "Tersedia"
-    data_kendaraan += [[nama_kendaraan, harga, status]]
-    print("Kendaraan berhasil ditambahkan!")
-    print()
-    lihat_kendaraan()
-def jalankan_rental():
+def peminjaman(jenis_kendaraan):
+    
+def pengembalian(jenis_kendaraan,N):
+    global kendaraan
+    i = 0
+    while i < N and kendaraan[i][0] != X:
+        i = i + 1
+        if kendaraan[i][0] == X:
+            ix = i
+        else:
+            ix = -1
+    return ix
+def cek_ketersediaan():
+    
+def main():
     berjalan = True
     while berjalan == True:
-        print("=== Selamat Datang di Rental Kendaraan Mantap ===")
-        print("1. Lihat Kendaraan & Statusnya")
-        print("2. Peminjaman Kendaraan")
-        print("3. Pengembalian Kendaraan")
-        print("4. Menambahkan kendaraan")
-        print("5. Keluar")
-        pilihan = input("Masukkan Pilihan Anda: ")
-        if pilihan == "1":
-            lihat_kendaraan()
-        elif pilihan == "2":
-            peminjaman_kendaraan()
-        elif pilihan == "3":
-            pengembalian_kendaraan()
-        elif pilihan == "4":
-            penambahan_kendaraan()
-        elif pilihan == "5":
-            print("Terima Kasih Sudah Menggunakan Jasa Kami")
+        print("\n--- MENU UTAMA ---")
+        print("1. Sewa kendaraan")
+        print("2. Kembalikan kendaraan")
+        print("3. Cek ketersediaan kendaraan")
+        print("4. Keluar")
+
+        nama = input("Silahkan masukan nama anda : ")
+        pilih_menu = int(input("pilih menu : "))
+        jenis_kendaraan = input("masukan jenis kendaraan : ") 
+            
+        if pilih_menu == 1:
+            peminjaman(jenis_kendaraan)
+        elif pilih_menu == 2:
+            pengembalian(jenis_kendaraan)
+        elif pilih_menu == 3:
+            cek_ketersediaan()
+        elif pilih_menu == 4:
             berjalan = False
-if __name__ == "__main__":
-    jalankan_rental()
+            
+if __name__ == '__main__':
+    main()

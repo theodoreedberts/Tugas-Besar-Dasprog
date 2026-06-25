@@ -13,16 +13,16 @@ kendaraan = [
     [6, "Innova Reborn", "Mobil", 450000, 0],
     [7, "Ferrari SF90","Mobil",4895000,0],
     [8, "Pagani Huayra","Mobil", 4000000,0],
-    [9, "Harley Davidson FAT BOY","Motor",3024244,0]
+    [9, "Harley Davidson FAT BOY","Motor",2799000,0]
 ]
 
 def cari_kendaraan_by_id(id_dicari):
-    # Ubah input menjadi angka karena ID di list berupa angka
     id_dicari = int(id_dicari)
     
     indeks = 0
-    for data in kendaraan:
-        if data[0] == id_dicari:
+    N = 9
+    while indeks < N:
+        if kendaraan[indeks][0] == id_dicari:
             return indeks
         indeks = indeks + 1
     return -1
@@ -43,9 +43,12 @@ def peminjaman(nama):
     cek_ketersediaan()
 
     tersedia = False
-    for i in range(len(kendaraan)):
+    i = 0
+    N = 9
+    while i < N:
         if (kendaraan[i][2] == jenis) and (kendaraan[i][4] == 0):
             tersedia = True
+        i = i + 1
 
     if (tersedia == False):
         print("Tidak ada", jenis, "yang tersedia saat ini")
@@ -123,27 +126,33 @@ def cek_ketersediaan():
     print("2. Motor")
     pilihan = int(input("Pilihan : "))
     if pilihan == 1:
-        for mobil in kendaraan:
-            if mobil[2] == "Mobil":
-                if mobil[4] == 0 or mobil[4] == "Ya":
+        i = 0
+        N = 9
+        while i < N:
+            if kendaraan[i][2] == "Mobil":
+                if kendaraan[i][4] == 0 or kendaraan[i][4] == "Ya":
                     status = "Tersedia"
                 else:
                     status = "Sedang disewa"
-                print("ID :", mobil[0])
-                print("Nama :", mobil[1])
+                print("ID :", kendaraan[i][0])
+                print("Nama :", kendaraan[i][1])
                 print("Status :", status)
                 print("------------------------------")
+            i = i + 1
     elif pilihan == 2:
-        for motor in kendaraan:
-            if motor[2] == "Motor":
-                if motor[4] == 0 or motor[4] == "Ya":
+        i = 0
+        N = 9
+        while i < N:
+            if kendaraan[i][2] == "Motor":
+                if kendaraan[i][4] == 0 or kendaraan[i][4] == "Ya":
                     status = "Tersedia"
                 else:
                     status = "Sedang disewa"
-                print("ID :", motor[0])
-                print("Nama :", motor[1])
+                print("ID :", kendaraan[i][0])
+                print("Nama :", kendaraan[i][1])
                 print("Status :", status)
                 print("------------------------------")
+            i = i + 1
 
 def main():
     berjalan = True

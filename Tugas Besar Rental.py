@@ -4,6 +4,7 @@
 #   3. Laporan ketersediaan kendaraan real-time
 #   4. Simulasi booking & perhitungan biaya + diskon member
 #   5. Sistem pengembalian via ID transaksi
+
 kendaraan = [
     [1, "Totoya Calya", "Mobil", 120000, 0, ""],
     [2, "Hondoz XMAX 250", "Motor", 250000, 0, ""],
@@ -18,7 +19,6 @@ kendaraan = [
 
 def cari_kendaraan_by_id(id_dicari):
     id_dicari = int(id_dicari)
-    
     indeks = 0
     N = 9
     while indeks < N:
@@ -28,7 +28,8 @@ def cari_kendaraan_by_id(id_dicari):
     return -1
 
 def peminjaman():
-    print("Peminjaman Kendaraan")
+    print()
+    print("=== PEMINJAMAN KENDARAAN ===")
     nama = input("Silahkan masukan nama anda : ")
     print("Pilih Jenis Kendaraan")
     print("1. Mobil")
@@ -85,7 +86,7 @@ def peminjaman():
         return
     
 def pengembalian():
-    print("\n=== PENGEMBALIAN KENDARAAN ===")
+    print("=== PENGEMBALIAN KENDARAAN ===")
     X = int(input("Masukkan ID Transaksi (ID Kendaraan) yang dikembalikan: "))
     
     N = 9 
@@ -119,7 +120,7 @@ def cari(N,X):
     return ix
 
 def cek_ketersediaan(pilihan):
-    print("--- DAFTAR KENDARAAN ---")
+    print("=== DAFTAR KENDARAAN ===")
     if pilihan == 1:
         i = 0
         N = 9
@@ -132,7 +133,7 @@ def cek_ketersediaan(pilihan):
                 print("ID :", kendaraan[i][0])
                 print("Nama :", kendaraan[i][1])
                 print("Status :", status)
-                print("------------------------------")
+                print("===============================")
             i = i + 1
     elif pilihan == 2:
         i = 0
@@ -146,13 +147,14 @@ def cek_ketersediaan(pilihan):
                 print("ID :", kendaraan[i][0])
                 print("Nama :", kendaraan[i][1])
                 print("Status :", status)
-                print("------------------------------")
+                print("===============================")
             i = i + 1
 
 def main():
     berjalan = True
     while berjalan == True:
-        print("\n--- MENU UTAMA ---")
+        print()
+        print("=== MENU UTAMA ===")
         print("1. Sewa kendaraan")
         print("2. Kembalikan kendaraan")
         print("3. Cek ketersediaan kendaraan")

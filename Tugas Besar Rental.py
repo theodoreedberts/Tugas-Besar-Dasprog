@@ -1,10 +1,3 @@
-# Fitur:
-#   1. Peminjaman & pengembalian kendaraan
-#   2. Daftar jenis kendaraan (Mobil, Motor)
-#   3. Laporan ketersediaan kendaraan real-time
-#   4. Simulasi booking & perhitungan biaya + diskon member
-#   5. Sistem pengembalian via ID transaksi
-
 kendaraan = [
     [1, "Totoya Calya", "Mobil", 120000, 0, ""],
     [2, "Hondoz XMAX 250", "Motor", 250000, 0, ""],
@@ -42,7 +35,7 @@ def peminjaman():
     if (tersedia == False):
         print("Tidak ada", jenis, "yang tersedia saat ini")
         return 
-    input_kendaraan = input("Masukkan ID kendaraan : ")
+    input_kendaraan = int(input("Masukkan ID kendaraan : "))
 
     indeks_kendaraan = cari(9, input_kendaraan, "id")
 
@@ -98,22 +91,23 @@ def pengembalian():
             kendaraan[ix][4] = 0
             kendaraan[ix][5] = ""
             print(f"Terima kasih {nama_peminjam}! Kendaraan {kendaraan[ix][1]} berhasil dikembalikan.")
+
 def cari(N,X,cari_kendaraan):
     global kendaraan
     if cari_kendaraan == "id":
         i = 0
-        while i<N-1 and X not in kendaraan[i][0]:
+        while i<N-1 and kendaraan[i][0] != X:
             i = i + 1
-        if X in kendaraan[i][0]:
+        if kendaraan[i][0] == X:
             ix = i
         else:
             ix = -1
         return ix
     elif cari_kendaraan == "nama":
         i = 0
-        while i<N-1 and X not in kendaraan[i][1]:
+        while i<N-1 and X != kendaraan[i][1]:
             i = i + 1
-        if X in kendaraan[i][1]:
+        if X == kendaraan[i][1]:
             ix = i
         else:
             ix = -1
@@ -126,7 +120,7 @@ def cek_ketersediaan(pilihan):
         N = 9
         while i < N:
             if kendaraan[i][2] == "Mobil":
-                if kendaraan[i][4] == 0 or kendaraan[i][4] == "Ya":
+                if kendaraan[i][4] == 0:
                     status = "Tersedia"
                 else:
                     status = "Sedang disewa"
@@ -147,7 +141,7 @@ def cek_ketersediaan(pilihan):
                 print("ID :", kendaraan[i][0])
                 print("Nama :", kendaraan[i][1])
                 print("Status :", status)
-                print("===============================")
+                print("===============================") 
             i = i + 1
 
 def main():
@@ -178,7 +172,7 @@ def main():
             pilihan = int(input("Pilihan : "))
             
             if pilihan == 1:
-                x = input("Masukkan ID Kendaraan : ")
+                x = int(input("Masukkan ID Kendaraan : "))
                 IN = cari(9,x,"id")
             elif pilihan == 2:
                 x = input("Masukkan Nama Kendaraan : ")

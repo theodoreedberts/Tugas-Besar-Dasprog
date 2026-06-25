@@ -17,16 +17,6 @@ kendaraan = [
     [9, "Harley Davidson FAT BOY","Motor",2799000,0, ""]
 ]
 
-def cari_kendaraan_by_id(id_dicari):
-    id_dicari = int(id_dicari)
-    indeks = 0
-    N = 9
-    while indeks < N:
-        if kendaraan[indeks][0] == id_dicari:
-            return indeks
-        indeks = indeks + 1
-    return -1
-
 def peminjaman():
     print()
     print("=== PEMINJAMAN KENDARAAN ===")

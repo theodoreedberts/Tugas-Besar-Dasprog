@@ -5,15 +5,15 @@
 #   4. Simulasi booking & perhitungan biaya + diskon member
 #   5. Sistem pengembalian via ID transaksi
 kendaraan = [
-    [1, "Totoya Calya", "Mobil", 120000, 0],
-    [2, "Hondoz XMAX 250", "Motor", 250000, 0],
-    [3, "Hondoz PCX 150", "Motor", 85000, 0],
-    [4, "Totoya 2020", "Mobil", 250000, 0],
-    [5, "Rolls Royce Spectre Series", "Mobil", 22135000, 0],
-    [6, "Innova Reborn", "Mobil", 450000, 0],
-    [7, "Ferrari SF90","Mobil",4895000,0],
-    [8, "Pagani Huayra","Mobil", 4000000,0],
-    [9, "Harley Davidson FAT BOY","Motor",2799000,0]
+    [1, "Totoya Calya", "Mobil", 120000, 0, ""],
+    [2, "Hondoz XMAX 250", "Motor", 250000, 0, ""],
+    [3, "Hondoz PCX 150", "Motor", 85000, 0, ""],
+    [4, "Totoya 2020", "Mobil", 250000, 0, ""],
+    [5, "Rolls Royce Spectre Series", "Mobil", 22135000, 0, ""],
+    [6, "Innova Reborn", "Mobil", 450000, 0, ""],
+    [7, "Ferrari SF90","Mobil",4895000,0, ""],
+    [8, "Pagani Huayra","Mobil", 4000000,0, ""],
+    [9, "Harley Davidson FAT BOY","Motor",2799000,0, ""]
 ]
 
 def cari_kendaraan_by_id(id_dicari):
@@ -27,9 +27,9 @@ def cari_kendaraan_by_id(id_dicari):
         indeks = indeks + 1
     return -1
 
-def peminjaman(nama):
+def peminjaman():
     print("Peminjaman Kendaraan")
-
+    nama = input("Silahkan masukan nama anda : ")
     print("Pilih Jenis Kendaraan")
     print("1. Mobil")
     print("2. Motor")
@@ -39,9 +39,7 @@ def peminjaman(nama):
         jenis = "Mobil"
     else:
         jenis = "Motor"
-    
-    cek_ketersediaan()
-
+    cek_ketersediaan(pilih_jenis)
     tersedia = False
     i = 0
     N = 9
@@ -53,9 +51,7 @@ def peminjaman(nama):
     if (tersedia == False):
         print("Tidak ada", jenis, "yang tersedia saat ini")
         return 
-
-    print(" Masukkan ID kendaraan : ")
-    input_kendaraan = input("ID Kendaraan: ")
+    input_kendaraan = input("Masukkan ID kendaraan : ")
 
     indeks_kendaraan = cari_kendaraan_by_id(input_kendaraan)
 
@@ -70,61 +66,60 @@ def peminjaman(nama):
         return
     
     jumlah_hari = int(input("Jumlah hari sewa (1-30): "))
+    if jumlah_hari > 0 and jumlah_hari <= 30:
+        harga_sewa = kendaraan[indeks_kendaraan][3]
+        total_biaya = harga_sewa * jumlah_hari
+        kendaraan[indeks_kendaraan][4] = 1
+        kendaraan[indeks_kendaraan][5] = nama
+        print("")
+        print("=== STRUK PEMINJAMAN ===")
+        print("Nama        :",nama)
+        print("Kendaraan   :", kendaraan[indeks_kendaraan][1])
+        print("Jenis       :", kendaraan[indeks_kendaraan][2])
+        print("Harga Sewa  : Rp", kendaraan[indeks_kendaraan][3])
+        print("Lama sewa   :", jumlah_hari, "hari")
+        print("Total Bayar : Rp", total_biaya)
+        print("Terima kasih sudah menyewa!")
+    else:
+        print("Kelebihan hari! Mohon Maaf")
+        return
     
-    # Hitung total biaya
-    harga_sewa = kendaraan[indeks_kendaraan][3]
-    total_biaya = harga_sewa * jumlah_hari
+def pengembalian():
+    print("\n=== PENGEMBALIAN KENDARAAN ===")
+    X = int(input("Masukkan ID Transaksi (ID Kendaraan) yang dikembalikan: "))
     
-    # Ubah status kendaraan menjadi 1 (disewa)
-    kendaraan[indeks_kendaraan][4] = 1
-    
-    print("")
-    print("=== STRUK PEMINJAMAN ===")
-    print("Nama        :",nama)
-    print("Kendaraan   :", kendaraan[indeks_kendaraan][1])
-    print("Jenis       :", kendaraan[indeks_kendaraan][2])
-    print("Harga Sewa  : Rp", kendaraan[indeks_kendaraan][3])
-    print("Lama sewa   :", jumlah_hari, "hari")
-    print("Total Bayar : Rp", total_biaya)
-    print("Terima kasih sudah menyewa!")
-    
-def sorting(N,X):
-    global kendaraan
+    N = 9 
     i = 0
     while i < N and kendaraan[i][0] != X:
         i = i + 1
-        if kendaraan[i][0] == X:
-            ix = i
-        else:
-            ix = -1
-    return ix
-def pengembalian(nama):
-    print("=== PENGEMBALIAN KENDARAAN ===")
-    input_id = input("Masukkan ID kendaraan yang ingin dikembalikan : ")
-    
-    indeks = cari_kendaraan_by_id(input_id)
-    
-    if indeks == -1:
-        print("ID kendaraan tidak ditemukan.")
+    if i < N:
+        ix = i
+    else: 
+        ix = -1
+        
+    if ix == -1:
+        print("ID Transaksi tidak ditemukan atau salah!")
     else:
-        # Cek apakah memang sedang disewa (status 1)
-        if kendaraan[indeks][4] == 1:
-            # Ubah status kembali ke 0 (Tersedia)
-            kendaraan[indeks][4] = 0
-            print("Kendaraan", kendaraan[indeks][1], "berhasil dikembalikan.")
-            print("Terima kasih!",nama)
+        if kendaraan[ix][4] == 0:
+            print("Kendaraan ini tersedia (tidak sedang disewa).")
         else:
-            print("Kendaraan", kendaraan[indeks][1], "tidak sedang disewa (masih ada di rental).")
-def cari():
-    print("")
+            nama_peminjam = kendaraan[ix][5]
+            kendaraan[ix][4] = 0
+            kendaraan[ix][5] = ""
+            print(f"Terima kasih {nama_peminjam}! Kendaraan {kendaraan[ix][1]} berhasil dikembalikan.")
+def cari(N,X):
+    global kendaraan
+    i = 0
+    while i<N-1 and X not in kendaraan[i][1]:
+        i = i + 1
+    if X in kendaraan[i][1]:
+        ix = i
+    else:
+        ix = -1
+    return ix
 
-def cek_ketersediaan():
-    print("")
+def cek_ketersediaan(pilihan):
     print("--- DAFTAR KENDARAAN ---")
-    print("Pilih Jenis Kendaraan")
-    print("1. Mobil")
-    print("2. Motor")
-    pilihan = int(input("Pilihan : "))
     if pilihan == 1:
         i = 0
         N = 9
@@ -161,16 +156,38 @@ def main():
         print("1. Sewa kendaraan")
         print("2. Kembalikan kendaraan")
         print("3. Cek ketersediaan kendaraan")
-        print("4. Keluar")
-        nama = input("Silahkan masukan nama anda : ")
+        print("4. Cari Kendaraan")
+        print("5. Keluar")
         pilih_menu = int(input("pilih menu : "))
         if pilih_menu == 1:
-            peminjaman(nama)
+            peminjaman()
         elif pilih_menu == 2:
-            pengembalian(nama)
+            pengembalian()
         elif pilih_menu == 3:
-            cek_ketersediaan()
+            print("Pilih Jenis Kendaraan")
+            print("1. Mobil")
+            print("2. Motor")
+            pilihan = int(input("Pilihan : "))
+            cek_ketersediaan(pilihan)
         elif pilih_menu == 4:
+            cek_ketersediaan("Semua")
+            x = input("Masukkan nama Kendaraan : ")
+            IN = cari(9,x)
+            if IN >= 0:
+                print("Kendaraan Ditemukan :")
+                print("ID :", kendaraan[IN][0])
+                print("Nama :", kendaraan[IN][1])
+                print("Jenis :", kendaraan[IN][2])
+                print("Harga Sewa :", kendaraan[IN][3])
+                if kendaraan[IN][4] == 0:
+                    status = "Tersedia"
+                else:
+                    status = "Sedang Disewa"
+                print("Status :", status)
+            else:
+                print("Kendaraan Tidak Ditemukan")
+            
+        elif pilih_menu == 5:
             print("Program selesai. Terima kasih")
             berjalan = False
         else:

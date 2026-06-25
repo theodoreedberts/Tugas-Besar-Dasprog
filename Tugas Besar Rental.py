@@ -1,10 +1,4 @@
-# Fitur:
-#   1. Peminjaman & pengembalian kendaraan
-#   2. Daftar jenis kendaraan (Mobil, Motor)
-#   3. Laporan ketersediaan kendaraan real-time
-#   4. Simulasi booking & perhitungan biaya + diskon member
-#   5. Sistem pengembalian via ID transaksi
-
+#Kendaraan = Array Dua Dimensi yang kolomnya terdiri dari Kolom 0: ID, Kolom 1: Nama, Kolom 2: Jenis, Kolom 4: Status Ketersediaan.
 kendaraan = [
     [1, "Totoya Calya", "Mobil", 120000, 0, ""],
     [2, "Hondoz XMAX 250", "Motor", 250000, 0, ""],
@@ -16,6 +10,17 @@ kendaraan = [
     [8, "Pagani Huayra","Mobil", 4000000,0, ""],
     [9, "Harley Davidson FAT BOY","Motor",2799000,0, ""]
 ]
+
+# Kamus Data
+# pilih_jenis : var. input (int)
+# tersedia : var. boolean (menandakan apakah ada kendaraan yang siap disewa)
+# i : var. interger (iterator indeks untuk perulangan while)
+# N : var. interger (jumlah total kendaraan dalam list)
+# input_kendaraan : var. input (int)
+# indeks_kendaraan : var. integer (menyimpan hasil pencarian indeks kendaraan)
+# jumlah_hari : var. input (int)
+# harga_sewa : var. input (int)
+# total_biaya : var. input (int)
 
 def peminjaman():
     print()
@@ -42,7 +47,7 @@ def peminjaman():
     if (tersedia == False):
         print("Tidak ada", jenis, "yang tersedia saat ini")
         return 
-    input_kendaraan = input("Masukkan ID kendaraan : ")
+    input_kendaraan = int(input("Masukkan ID kendaraan : "))
 
     indeks_kendaraan = cari(9, input_kendaraan, "id")
 
@@ -74,7 +79,14 @@ def peminjaman():
     else:
         print("Kelebihan hari! Mohon Maaf")
         return
-    
+
+# Kamus Data
+# X : var. input (int)
+# N : var. int
+# i : var. int untuk iterasi
+# ix : variabel int untuk menyatakan ketemu atau tidak ketemu
+# nama_peminjam : var. string untuk namanya
+
 def pengembalian():
     print("=== PENGEMBALIAN KENDARAAN ===")
     X = int(input("Masukkan ID Transaksi (ID Kendaraan) yang dikembalikan: "))
@@ -98,26 +110,38 @@ def pengembalian():
             kendaraan[ix][4] = 0
             kendaraan[ix][5] = ""
             print(f"Terima kasih {nama_peminjam}! Kendaraan {kendaraan[ix][1]} berhasil dikembalikan.")
+
+# Kamus Data
+# PARAMETER:
+# N : var. int
+# X : var. int atau var. string
+# cari_kendaraan : string (mode pencarian; "id" atau "nama")
+
 def cari(N,X,cari_kendaraan):
     global kendaraan
     if cari_kendaraan == "id":
         i = 0
-        while i<N-1 and X not in kendaraan[i][0]:
+        while i<N-1 and kendaraan[i][0] != X:
             i = i + 1
-        if X in kendaraan[i][0]:
+        if kendaraan[i][0] == X:
             ix = i
         else:
             ix = -1
         return ix
     elif cari_kendaraan == "nama":
         i = 0
-        while i<N-1 and X not in kendaraan[i][1]:
+        while i<N-1 and X != kendaraan[i][1]:
             i = i + 1
-        if X in kendaraan[i][1]:
+        if X == kendaraan[i][1]:
             ix = i
         else:
             ix = -1
         return ix
+
+# Kamus Data
+# i : var. int (iterator indeks untuk menelusuri list)
+# N : var. int (jumlah total data kendaraan)
+# kendaraan : array kendaraan
 
 def cek_ketersediaan(pilihan):
     print("=== DAFTAR KENDARAAN ===")
@@ -126,7 +150,7 @@ def cek_ketersediaan(pilihan):
         N = 9
         while i < N:
             if kendaraan[i][2] == "Mobil":
-                if kendaraan[i][4] == 0 or kendaraan[i][4] == "Ya":
+                if kendaraan[i][4] == 0:
                     status = "Tersedia"
                 else:
                     status = "Sedang disewa"
@@ -147,8 +171,12 @@ def cek_ketersediaan(pilihan):
                 print("ID :", kendaraan[i][0])
                 print("Nama :", kendaraan[i][1])
                 print("Status :", status)
-                print("===============================")
+                print("===============================") 
             i = i + 1
+
+# Kamus Data
+# pilih_menu : var. input (int)
+# pilihan : var. input (int)
 
 def main():
     berjalan = True
@@ -178,7 +206,7 @@ def main():
             pilihan = int(input("Pilihan : "))
             
             if pilihan == 1:
-                x = input("Masukkan ID Kendaraan : ")
+                x = int(input("Masukkan ID Kendaraan : "))
                 IN = cari(9,x,"id")
             elif pilihan == 2:
                 x = input("Masukkan Nama Kendaraan : ")

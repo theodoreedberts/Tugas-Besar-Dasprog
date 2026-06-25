@@ -16,6 +16,22 @@ kendaraan = [
     [9, "Harley Davidson FAT BOY","Motor",3024244]
 ]
 def peminjaman(jenis_kendaraan):
+    print("Peminjaman Kendaraan")
+
+    print("Pilih Jenis Kendaraan")
+    print("1. Mobil")
+    print("2. Motor")
+
+    pilih_jenis = int(input("Pilih (1/2) : "))
+    if (pilih_jenis == 1):
+        jenis = "Mobil"
+    else:
+        jenis = "Motor"
+    
+    cek_ketersediaan(jenis)
+
+    
+
     
 def pengembalian(jenis_kendaraan,N):
     global kendaraan

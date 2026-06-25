@@ -54,7 +54,7 @@ def peminjaman():
         return 
     input_kendaraan = input("Masukkan ID kendaraan : ")
 
-    indeks_kendaraan = cari_kendaraan_by_id(input_kendaraan)
+    indeks_kendaraan = cari(9, input_kendaraan, "id")
 
     if (indeks_kendaraan == -1):
         print("ID kendaraan tidak ditemukan")

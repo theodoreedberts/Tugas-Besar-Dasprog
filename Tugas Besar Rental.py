@@ -76,10 +76,7 @@ def main():
         print("3. Cek ketersediaan kendaraan")
         print("4. Keluar")
 
-        nama = input("Silahkan masukan nama anda : ")
-        pilih_menu = int(input("pilih menu : "))
-        jenis_kendaraan = input("masukan jenis kendaraan : ") 
-            
+        pilih_menu = int(input("Pilih menu (1-4): "))            
         if pilih_menu == 1:
             peminjaman(jenis_kendaraan)
         elif pilih_menu == 2:
@@ -87,7 +84,10 @@ def main():
         elif pilih_menu == 3:
             cek_ketersediaan()
         elif pilih_menu == 4:
+            print("Program selesai. Terima kasih")
             berjalan = False
+        else:
+            print("Pilihan menu tidak valid!")
             
 if __name__ == '__main__':
     main()

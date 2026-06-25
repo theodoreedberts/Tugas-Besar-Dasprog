@@ -30,8 +30,30 @@ def peminjaman(jenis_kendaraan):
     
     cek_ketersediaan(jenis)
 
-    
+    tersedia = False
+    for i in range(max_kendaraan):
+        if (kendaraan[i][2] == jenis) and (kendaraan[i][4] == "Ya"):
+            tersedia = True
 
+    if (tersedia == False):
+        print(f"Tidak ada {jenis} yang tersedia saat ini")
+        return 
+
+    print(" Masukkan ID kendaraan : ")
+    input_kendaraan = input("ID Kendaraan: ")
+
+    indeks_kendaraan = cari_kendaraan_by_id(input_kendaraan)
+
+    if (indeks_kendaraan == -1):
+        print("ID kendaraan tidak ditemukan")
+    elif (kendaraan[indeks_kendaraan][4] == "Tidak"):
+        print("Kendaraan sedang tidak tersedia")
+    elif (kendaraan[indeks_kendaraan][2] != jenis):
+        print(f"Kendaraan {input_kendaraan} bukan jenis {jenis}")
+    
+    jumlah_hari = int(input("Jumlah hari sewa (1-30): "))
+    
+    
     
 def pengembalian(jenis_kendaraan,N):
     global kendaraan

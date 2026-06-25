@@ -48,6 +48,7 @@ def peminjaman():
         print("Tidak ada", jenis, "yang tersedia saat ini")
         return 
     input_kendaraan = int(input("Masukkan ID kendaraan : "))
+    input_kendaraan = int(input("Masukkan ID kendaraan : "))
 
     indeks_kendaraan = cari(9, input_kendaraan, "id")
 
@@ -122,7 +123,9 @@ def cari(N,X,cari_kendaraan):
     if cari_kendaraan == "id":
         i = 0
         while i<N-1 and kendaraan[i][0] != X:
+        while i<N-1 and kendaraan[i][0] != X:
             i = i + 1
+        if kendaraan[i][0] == X:
         if kendaraan[i][0] == X:
             ix = i
         else:
@@ -131,7 +134,9 @@ def cari(N,X,cari_kendaraan):
     elif cari_kendaraan == "nama":
         i = 0
         while i<N-1 and X != kendaraan[i][1]:
+        while i<N-1 and X != kendaraan[i][1]:
             i = i + 1
+        if X == kendaraan[i][1]:
         if X == kendaraan[i][1]:
             ix = i
         else:
@@ -150,6 +155,7 @@ def cek_ketersediaan(pilihan):
         N = 9
         while i < N:
             if kendaraan[i][2] == "Mobil":
+                if kendaraan[i][4] == 0:
                 if kendaraan[i][4] == 0:
                     status = "Tersedia"
                 else:
@@ -171,6 +177,7 @@ def cek_ketersediaan(pilihan):
                 print("ID :", kendaraan[i][0])
                 print("Nama :", kendaraan[i][1])
                 print("Status :", status)
+                print("===============================") 
                 print("===============================") 
             i = i + 1
 
@@ -206,6 +213,7 @@ def main():
             pilihan = int(input("Pilihan : "))
             
             if pilihan == 1:
+                x = int(input("Masukkan ID Kendaraan : "))
                 x = int(input("Masukkan ID Kendaraan : "))
                 IN = cari(9,x,"id")
             elif pilihan == 2:

@@ -107,16 +107,26 @@ def pengembalian():
             kendaraan[ix][4] = 0
             kendaraan[ix][5] = ""
             print(f"Terima kasih {nama_peminjam}! Kendaraan {kendaraan[ix][1]} berhasil dikembalikan.")
-def cari(N,X):
+def cari(N,X,cari_kendaraan):
     global kendaraan
-    i = 0
-    while i<N-1 and X not in kendaraan[i][1]:
-        i = i + 1
-    if X in kendaraan[i][1]:
-        ix = i
-    else:
-        ix = -1
-    return ix
+    if cari_kendaraan == "id":
+        i = 0
+        while i<N-1 and X not in kendaraan[i][0]:
+            i = i + 1
+        if X in kendaraan[i][0]:
+            ix = i
+        else:
+            ix = -1
+        return ix
+    elif cari_kendaraan == "nama":
+        i = 0
+        while i<N-1 and X not in kendaraan[i][1]:
+            i = i + 1
+        if X in kendaraan[i][1]:
+            ix = i
+        else:
+            ix = -1
+        return ix
 
 def cek_ketersediaan(pilihan):
     print("--- DAFTAR KENDARAAN ---")
@@ -170,9 +180,17 @@ def main():
             pilihan = int(input("Pilihan : "))
             cek_ketersediaan(pilihan)
         elif pilih_menu == 4:
-            cek_ketersediaan("Semua")
-            x = input("Masukkan nama Kendaraan : ")
-            IN = cari(9,x)
+            print("Cari Berdasarkan")
+            print("1. ID")
+            print("2. Nama")
+            pilihan = int(input("Pilihan : "))
+            
+            if pilihan == 1:
+                x = input("Masukkan ID Kendaraan : ")
+                IN = cari(9,x,"id")
+            elif pilihan == 2:
+                x = input("Masukkan Nama Kendaraan : ")
+                IN = cari(9,x,"nama")
             if IN >= 0:
                 print("Kendaraan Ditemukan :")
                 print("ID :", kendaraan[IN][0])

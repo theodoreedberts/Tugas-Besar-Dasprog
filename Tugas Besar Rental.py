@@ -164,7 +164,6 @@ def main():
         elif pilih_menu == 4:
             print("Program selesai. Terima kasih")
             berjalan = False
-            print("Program selesai. Terima kasih")
         else:
             print("Pilihan menu tidak valid!")
             
